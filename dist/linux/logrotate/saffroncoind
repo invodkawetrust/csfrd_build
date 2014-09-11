@@ -1,0 +1,7 @@
+!RUN_AS_USER_HOMEDIR!/.saffroncoin/debug.log !RUN_AS_USER_HOMEDIR!/.saffroncoin-testnet/testnet3/debug.log {
+    weekly
+    sharedscripts
+    postrotate
+        killall -HUP saffroncoind
+    endscript
+}
