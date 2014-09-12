@@ -26,13 +26,13 @@ except ImportError:
     pass
 
 PYTHON3_VER = None
-DEFAULT_CONFIG = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=5222\nbackend-rpc-user=rpc\nbackend-rpc-password=1234\nrpc-host=localhost\nrpc-port=7300\nrpc-user=rpc\nrpc-password=xcppw1234\ninsight-enable=0\nblockchain-service-name=addrindex"
-DEFAULT_CONFIG_TESTNET = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=25222\nbackend-rpc-user=rpc\nbackend-rpc-password=1234\nrpc-host=localhost\nrpc-port=17300\nrpc-user=rpc\nrpc-password=xcppw1234\ntestnet=1\ninsight-enable=0\nblockchain-service-name=addrindex"
+DEFAULT_CONFIG = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=19710\nbackend-rpc-user=saffroncoinrpc\nbackend-rpc-password=1234\nrpc-host=localhost\nrpc-port=39710\nrpc-user=csfrrpc\nrpc-password=pw1234\ninsight-enable=0\nblockchain-service-name=addrindex"
+DEFAULT_CONFIG_TESTNET = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=29716\nbackend-rpc-user=saffroncoinrpc\nbackend-rpc-password=1234\nrpc-host=localhost\nrpc-port=49710\nrpc-user=csfrrpc\nrpc-password=pw1234\ntestnet=1\ninsight-enable=0\nblockchain-service-name=addrindex"
 DEFAULT_CONFIG_INSTALLER = "[Default]\nbackend-rpc-connect=BITCOIND_RPC_CONNECT\nbackend-rpc-port=BITCOIND_RPC_PORT\nbackend-rpc-user=BITCOIND_RPC_USER\nbackend-rpc-password=BITCOIND_RPC_PASSWORD\nrpc-host=RPC_HOST\nrpc-port=RPC_PORT\nrpc-user=RPC_USER\nrpc-password=RPC_PASSWORD"
 
-DEFAULT_CONFIG_COUNTERWALLETD = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=5222\nbackend-rpc-user=rpc\nbackend-rpc-password=rpcpw1234\ncsfrd-rpc-host=localhost\ncsfringhoused-rpc-port=7300\ncsfrd-rpc-user=rpc\ncsfrd-rpc-password=xcppw1234\nrpc-host=0.0.0.0\nrpc-port=7310\nsocketio-host=0.0.0.0\nsocketio-chat-host=0.0.0.0\nredis-enable-apicache=0"
-DEFAULT_CONFIG_COUNTERWALLETD_TESTNET = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=25222\nbackend-rpc-user=rpc\nbackend-rpc-password=1234\ncsfrd-rpc-host=localhost\ncsfrd-rpc-port=17300\ncsfrd-rpc-user=rpc\ncsfrd-rpc-password=xcppw1234\nrpc-host=0.0.0.0\nrpc-port=17310\nsocketio-host=0.0.0.0\nsocketio-chat-host=0.0.0.0\nredis-enable-apicache=0\ntestnet=1"
-DEFAULT_CONFIG_INSTALLER_COUNTERWALLETD = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=5222\nbackend-rpc-user=rpc\nbackend-rpc-password=1234\ncsfrd-rpc-host=RPC_HOST\ncsfrd-rpc-port=RPC_PORT\ncsfrd-rpc-user=RPC_USER\ncsfrd-rpc-password=RPC_PASSWORD"
+DEFAULT_CONFIG_COUNTERWALLETD = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=19710\nbackend-rpc-user=saffroncoinrpc\nbackend-rpc-password=1234\ncsfrd-rpc-host=localhost\ncsfrd-rpc-port=39710\ncsfrd-rpc-user=csfrrpc\ncsfrd-rpc-password=pw1234\nrpc-host=0.0.0.0\nrpc-port=39710\nsocketio-host=0.0.0.0\nsocketio-chat-host=0.0.0.0\nredis-enable-apicache=0"
+DEFAULT_CONFIG_COUNTERWALLETD_TESTNET = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=29716\nbackend-rpc-user=rpc\nbackend-rpc-password=1234\ncsfrd-rpc-host=localhost\ncsfrd-rpc-port=49710\ncsfrd-rpc-user=csfrrpc\ncsfrd-rpc-password=pw1234\nrpc-host=0.0.0.0\nrpc-port=49710\nsocketio-host=0.0.0.0\nsocketio-chat-host=0.0.0.0\nredis-enable-apicache=0\ntestnet=1"
+DEFAULT_CONFIG_INSTALLER_COUNTERWALLETD = "[Default]\nbackend-rpc-connect=localhost\nbackend-rpc-port=19710\nbackend-rpc-user=rpc\nbackend-rpc-password=1234\ncsfrd-rpc-host=RPC_HOST\ncsfrd-rpc-port=RPC_PORT\ncsfrd-rpc-user=RPC_USER\ncsfrd-rpc-password=RPC_PASSWORD"
 
 def which(filename):
     """docstring for which"""
