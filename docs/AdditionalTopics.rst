@@ -34,7 +34,7 @@ options that tell ``csfrd`` where and how to connect to your ``saffroncoind`` pr
 
     [Default]
     saffroncoind-rpc-connect=localhost
-    saffroncoind-rpc-port=5222
+    saffroncoind-rpc-port=19710
     saffroncoind-rpc-user=rpc
     saffroncoind-rpc-password=rpcpw1234
     rpc-user=my_api_user
@@ -42,10 +42,10 @@ options that tell ``csfrd`` where and how to connect to your ``saffroncoind`` pr
 
 After running the ``setup.py`` script to create this file, you'll probably need to edit it and tweak the settings
 to match your exact ``saffroncoind`` configuration (e.g. especially ``rpc-password``). Note that the above config
-connects to ``saffroncoind`` on mainnet (port 5222).
+connects to ``saffroncoind`` on mainnet (port 19710).
 
 Note that also, with the config above, it will set up ``csfrd`` to listen on localhost (127.0.0.1)
-on port 7300 (if on mainnet) or port 17300 (if on testnet) for API connections (these are the default ports,
+on port 39710 (if on mainnet) or port 49710 (if on testnet) for API connections (these are the default ports,
 and can be changed by specifying the ``rpc-host`` and/or ``rpc-port`` parameters).
 
 

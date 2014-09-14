@@ -114,8 +114,8 @@ To run insight, you'd do something like the following at a command prompt::
     export SAFFRONCOIND_USER=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcuser=\([^ \n]*\).*/\1/p'`
     export SAFFRONCOIND_PASS=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcpassword=\([^ \n]*\).*/\1/p'`
     #SAFFRONCOIND_HOST -- specify to not use the default (localhost)
-    #SAFFRONCOIND_PORT -- specify to not use the default (5222)
-    #SAFFRONCOIND_P2P_PORT -- specify to not use the default (5223)
+    #SAFFRONCOIND_PORT -- specify to not use the default (19710)
+    #SAFFRONCOIND_P2P_PORT -- specify to not use the default (19717)
     node ~/insight-api/insight.js
 
 (Note that there is also an ``insight.conf.template`` and ``insight-testnet.conf.template`` upstart scripts that you can use in the
