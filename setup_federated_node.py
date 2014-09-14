@@ -834,7 +834,7 @@ def main():
             runcmd("service iwatch stop", abort_on_failure=False)
         
         #refresh counterpartyd_build, counterpartyd and counterblockd (if available)
-        runcmd("%s/setup.py %s --for-user=xcp update" % (base_path,
+        runcmd("%s/setup.py %s --for-user=sfr update" % (base_path,
             '--with-csfrblockd' if os.path.exists(os.path.join(dist_path, "csfrblockd")) else ''))
         
         #refresh counterwallet (if available)
