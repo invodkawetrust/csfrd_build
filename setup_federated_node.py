@@ -34,7 +34,7 @@ except ImportError:
 USERNAME = "sfr"
 DAEMON_USERNAME = "csfrd"
 REPO_COUNTERPARTYD_BUILD = "https://github.com/saffroncoin/csfrd_build.git"
-REPO_COUNTERWALLET = "https://github.com/saffroncoin/csfrdwallet.git"
+REPO_COUNTERWALLET = "https://github.com/saffroncoin/csfrwallet.git"
 
 def pass_generator(size=14, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
@@ -292,7 +292,7 @@ def do_bitcoind_setup(run_as_user, branch, base_path, dist_path, run_mode):
     return bitcoind_rpc_password, bitcoind_rpc_password_testnet
 
 def do_counterparty_setup(role, run_as_user, branch, base_path, dist_path, run_mode, bitcoind_rpc_password,
-bitcoind_rpc_password_testnet, csfrd_public, csfrdwallet_support_email):
+bitcoind_rpc_password_testnet, csfrd_public, csfrwallet_support_email):
     """Installs and configures counterpartyd and counterblockd"""
     user_homedir = os.path.expanduser("~" + USERNAME)
     counterpartyd_rpc_password = '1234' if role == 'csfrd_only' and csfrd_public == 'y' else pass_generator()
@@ -368,7 +368,7 @@ bitcoind_rpc_password_testnet, csfrd_public, csfrdwallet_support_email):
         modify_cp_config(r'^armory\-utxsvr\-enable=.*?$', 'armory-utxsvr-enable=%s' % 
             '1' if role == 'counterwallet' else '0', config='csfrblockd')
         if role == 'counterwallet':
-            modify_cp_config(r'^support\-email=.*?$', 'support-email=%s' % csfrdwallet_support_email,
+            modify_cp_config(r'^support\-email=.*?$', 'support-email=%s' % csfrwallet_support_email,
                 config='csfrblockd') #may be blank string
 
         #disable upstart scripts from autostarting on system boot if necessary
@@ -566,14 +566,14 @@ def do_armory_utxsvr_setup(run_as_user, base_path, dist_path, run_mode, enable=T
 
 def do_counterwallet_setup(run_as_user, branch, updateOnly=False):
     #check out counterwallet from git
-    git_repo_clone(branch, "csfrdwallet", REPO_COUNTERWALLET, run_as_user)
+    git_repo_clone(branch, "csfrwallet", REPO_COUNTERWALLET, run_as_user)
     if not updateOnly:
         runcmd("npm install -g grunt-cli bower")
-    runcmd("cd ~%s/csfrdwallet/src && bower --allow-root --config.interactive=false install" % USERNAME)
-    runcmd("cd ~%s/csfrdwallet && npm install" % USERNAME)
-    runcmd("cd ~%s/csfrdwallet && grunt build" % USERNAME) #will generate the minified site
-    runcmd("chown -R %s:%s ~%s/csfrdwallet" % (USERNAME, USERNAME, USERNAME)) #just in case
-    runcmd("chmod -R u+rw,g+rw,o+r,o-w ~%s/csfrdwallet" % USERNAME) #just in case
+    runcmd("cd ~%s/csfrwallet/src && bower --allow-root --config.interactive=false install" % USERNAME)
+    runcmd("cd ~%s/csfrwallet && npm install" % USERNAME)
+    runcmd("cd ~%s/csfrwallet && grunt build" % USERNAME) #will generate the minified site
+    runcmd("chown -R %s:%s ~%s/csfrwallet" % (USERNAME, USERNAME, USERNAME)) #just in case
+    runcmd("chmod -R u+rw,g+rw,o+r,o-w ~%s/csfrwallet" % USERNAME) #just in case
 
 def do_newrelic_setup(run_as_user, base_path, dist_path, run_mode):
     ##
@@ -704,13 +704,13 @@ def command_services(command, prompt=False):
 
 QUESTION_FLAGS = collections.OrderedDict({
     "op": ('u', 'r'),
-    "role": ('csfrdwallet', 'vendingmachine', 'blockexplorer', 'csfrd_only', 'btcpayescrow'),
+    "role": ('csfrwallet', 'vendingmachine', 'blockexplorer', 'csfrd_only', 'btcpayescrow'),
     "branch": ('master', 'develop'),
     "run_mode": ('t', 'm', 'b'),
     "blockchain_service": ('b', 'i'),
     "security_hardening": ('y', 'n'),
     "csfrd_public": ('y', 'n'),
-    "csfrdwallet_support_email": None
+    "csfrwallet_support_email": None
 })
 
 def gather_build_questions(answered_questions):
@@ -721,7 +721,7 @@ def gather_build_questions(answered_questions):
                 + "Your choice",
             ('1', '2', '3', '4', '5'), '1')
         if role == '1':
-            role = 'csfrdwallet'
+            role = 'csfrwallet'
             role_desc = "cSFRwallet server"
         elif role == '2':
             role = 'vendingmachine'
@@ -768,7 +768,7 @@ def gather_build_questions(answered_questions):
     assert answered_questions['csfrd_public'] in QUESTION_FLAGS['csfrd_public']
 
     counterwallet_support_email = None
-    if role == 'csfrdwallet' and 'csfrdwallet_support_email' not in answered_questions:
+    if role == 'csfrwallet' and 'csfrwallet_support_email' not in answered_questions:
         while True:
             counterwallet_support_email = input("Email address where support cases should go (blank to disable): ")
             counterwallet_support_email = counterwallet_support_email.strip()
@@ -777,9 +777,9 @@ def gather_build_questions(answered_questions):
                     "You entererd '%s', is that right? (Y/n): " % counterwallet_support_email, ('y', 'n'), 'y') 
                 if counterwallet_support_email_confirm == 'y': break
             else: break
-        answered_questions['csfrdwallet_support_email'] = counterwallet_support_email
+        answered_questions['csfrwallet_support_email'] = counterwallet_support_email
     else:
-        answered_questions['csfrdwallet_support_email'] = answered_questions.get('csfrdwallet_support_email', '') 
+        answered_questions['csfrwallet_support_email'] = answered_questions.get('csfrwallet_support_email', '') 
 
     if 'security_hardening' not in answered_questions:
         answered_questions['security_hardening'] = ask_question("Set up security hardening? (Y/n)", ('y', 'n'), 'y')
@@ -837,7 +837,7 @@ def main():
             '--with-csfrblockd' if os.path.exists(os.path.join(dist_path, "csfrblockd")) else ''))
         
         #refresh counterwallet (if available)
-        if os.path.exists(os.path.exists(os.path.expanduser("~%s/csfrdwallet" % USERNAME))):
+        if os.path.exists(os.path.exists(os.path.expanduser("~%s/csfrwallet" % USERNAME))):
             do_counterwallet_setup(run_as_user, "AUTO", updateOnly=True)
 
         #offer to restart services
@@ -858,7 +858,7 @@ def main():
     
     do_counterparty_setup(answered_questions['role'], run_as_user, answered_questions['branch'], base_path, dist_path, answered_questions['run_mode'],
         bitcoind_rpc_password, bitcoind_rpc_password_testnet,
-        answered_questions['csfrd_public'], answered_questions['csfrdwallet_support_email'])
+        answered_questions['csfrd_public'], answered_questions['csfrwallet_support_email'])
     
     do_blockchain_service_setup(run_as_user, base_path, dist_path,
         answered_questions['run_mode'], answered_questions['blockchain_service'])
@@ -867,8 +867,8 @@ def main():
         do_nginx_setup(run_as_user, base_path, dist_path)
     
     do_armory_utxsvr_setup(run_as_user, base_path, dist_path,
-        answered_questions['run_mode'], enable=answered_questions['role']=='csfrdwallet')
-    if answered_questions['role'] == 'csfrdwallet':
+        answered_questions['run_mode'], enable=answered_questions['role']=='csfrwallet')
+    if answered_questions['role'] == 'csfrwallet':
         do_counterwallet_setup(run_as_user, answered_questions['branch'])
 
     do_newrelic_setup(run_as_user, base_path, dist_path, answered_questions['run_mode']) #optional
