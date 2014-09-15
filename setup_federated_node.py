@@ -245,7 +245,7 @@ def do_bitcoind_setup(run_as_user, branch, base_path, dist_path, run_mode):
     runcmd("rm -rf /tmp/saffroncoind.tar.gz")
     runcmd("wget -O /tmp/saffroncoind.tar.gz http://saffroncoin.com/saffroncoin-wallet-linux-%s.tar.gz" % (BITCOIND_VER))
     runcmd("tar -C /tmp -zxvf /tmp/saffroncoind.tar.gz")
-    runcmd("cp -af /tmp/saffroncoind/saffroncoind /usr/local/bin")
+    runcmd("cp -af /tmp/saffroncoind /usr/local/bin")
     runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoind")
 
     #Do basic inital bitcoin config (for both testnet and mainnet)
