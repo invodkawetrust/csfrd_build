@@ -38,7 +38,7 @@ QUESTION_FLAGS = collections.OrderedDict({
     "role": ('csfrwallet', 'vendingmachine', 'blockexplorer', 'csfrd_only', 'btcpayescrow'),
     "branch": ('master', 'develop'),
     "run_mode": ('t', 'm', 'b'),
-    "backend_rpc_mode": ('b', 'p'),
+    "backend_rpc_mode": ('s', 'p'),
     "blockchain_service": ('b', 'i'),
     "security_hardening": ('y', 'n'),
     "csfrd_public": ('y', 'n'),
