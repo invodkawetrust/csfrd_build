@@ -110,7 +110,7 @@ def do_backend_rpc_setup(run_as_user, branch, base_path, dist_path, run_mode, ba
         runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoind")
     
         #Do basic inital saffroncoin config (for both testnet and mainnet)
-        runcmd("mkdir -p ~%s/.saffroncoin ~%s/.saffroncoin-testnet" % (USERNAME, USERNAME))
+        runcmd("mkdir -p ~%s/.saffroncoin ~%s/.saffroncoin-testnet ~%s/csfrd_build/linux/runit" % (USERNAME, USERNAME, USERNAME))
         if not os.path.exists(os.path.join(USER_HOMEDIR, '.saffroncoin', 'saffroncoin.conf')):
             runcmd(r"""bash -c 'echo -e "rpcuser=rpc\nrpcpassword=%s\nserver=1\ndaemon=1\ntxindex=1" > ~%s/.saffroncoin/saffroncoin.conf'""" % (
                 backend_rpc_password, USERNAME))
