@@ -78,7 +78,7 @@ def do_base_setup(run_as_user, branch, base_path, dist_path):
         logging.info("Creating user '%s' ..." % USERNAME)
         runcmd("adduser --system --disabled-password --shell /bin/false --group %s" % USERNAME)
         
-    #Create csfrd user (to run csfrd, csfrblockd, insight, bitcoind, nginx) if not already made
+    #Create csfrd user (to run csfrd, csfrblockd, insight, saffroncoind, nginx) if not already made
     try:
         pwd.getpwnam(DAEMON_USERNAME)
     except:
@@ -96,15 +96,15 @@ def do_base_setup(run_as_user, branch, base_path, dist_path):
     runcmd("cp -af %s/linux/other/csfrd_security_limits.conf /etc/security/limits.d/" % dist_path)
 
 def do_backend_rpc_setup(run_as_user, branch, base_path, dist_path, run_mode, backend_rpc_mode):
-    """Installs and configures bitcoind"""
+    """Installs and configures saffroncoind"""
     backend_rpc_password = pass_generator()
     backend_rpc_password_testnet = pass_generator()
 
     if backend_rpc_mode == 'b': #saffroncoind
         #Install saffroncoind
-        BITCOIND_VER = "1.3.4"
-        runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoin-%s-linux" % BITCOIND_VER)
-        runcmd("wget -O /tmp/saffroncoind.tar.gz http://saffroncoin.com/saffroncoin-binary-%s.tar.gz" % (BITCOIND_VER))
+        SAFFRONCOIND_VER = "1.3.4"
+        runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoin-%s-linux" % SAFFRONCOIND_VER)
+        runcmd("wget -O /tmp/saffroncoind.tar.gz http://saffroncoin.com/saffroncoin-binary-%s.tar.gz" % (SAFFRONCOIND_VER))
         runcmd("tar -C /tmp -zxvf /tmp/saffroncoind.tar.gz")
         runcmd("cp -af /tmp/saffroncoind /usr/bin")
         runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoind")
@@ -314,10 +314,10 @@ def do_nginx_setup(run_as_user, base_path, dist_path, enable=True):
 && mkdir -p /tmp/openresty/var/lib/nginx \
 && install -m 0755 -D %s/linux/runit/nginx/run /tmp/openresty/etc/sv/nginx/run \
 && install -m 0755 -D %s/linux/nginx/nginx.conf /tmp/openresty/etc/nginx/nginx.conf \
-&& install -m 0755 -D %s/linux/nginx/counterblock.conf /tmp/openresty/etc/nginx/sites-enabled/counterblock.conf \
-&& install -m 0755 -D %s/linux/nginx/counterblock_api.inc /tmp/openresty/etc/nginx/sites-enabled/counterblock_api.inc \
-&& install -m 0755 -D %s/linux/nginx/counterblock_api_cache.inc /tmp/openresty/etc/nginx/sites-enabled/counterblock_api_cache.inc \
-&& install -m 0755 -D %s/linux/nginx/counterblock_socketio.inc /tmp/openresty/etc/nginx/sites-enabled/counterblock_socketio.inc \
+&& install -m 0755 -D %s/linux/nginx/csfrblock.conf /tmp/openresty/etc/nginx/sites-enabled/csfrblock.conf \
+&& install -m 0755 -D %s/linux/nginx/csfrblock_api.inc /tmp/openresty/etc/nginx/sites-enabled/csfrblock_api.inc \
+&& install -m 0755 -D %s/linux/nginx/csfrblock_api_cache.inc /tmp/openresty/etc/nginx/sites-enabled/csfrblock_api_cache.inc \
+&& install -m 0755 -D %s/linux/nginx/csfrblock_socketio.inc /tmp/openresty/etc/nginx/sites-enabled/csfrblock_socketio.inc \
 && install -m 0755 -D %s/linux/logrotate/nginx /tmp/openresty/etc/logrotate.d/nginx''' % (
     OPENRESTY_VER, dist_path, dist_path, dist_path, dist_path, dist_path, dist_path, dist_path))
     #package it up using fpm
@@ -330,7 +330,7 @@ def do_nginx_setup(run_as_user, base_path, dist_path, enable=True):
 -d geoip-database \
 -d libpcre3 \
 --config-files /etc/nginx/nginx.conf \
---config-files /etc/nginx/sites-enabled/counterblock.conf \
+--config-files /etc/nginx/sites-enabled/csfrblock.conf \
 --config-files /etc/nginx/fastcgi.conf.default \
 --config-files /etc/nginx/win-utf \
 --config-files /etc/nginx/fastcgi_params \
@@ -368,7 +368,7 @@ def do_armory_utxsvr_setup(run_as_user, base_path, dist_path, run_mode, enable=T
     runcmd("mkdir -p ~%s/.armory ~%s/.armory/log ~%s/.armory/log-testnet" % (USERNAME, USERNAME, USERNAME))
     runcmd("chown -R %s:%s ~%s/.armory" % (DAEMON_USERNAME, USERNAME, USERNAME))
     
-    runcmd("sudo ln -sf ~%s/.bitcoin-testnet/testnet3 ~%s/.bitcoin/" % (USERNAME, USERNAME))
+    runcmd("sudo ln -sf ~%s/.saffroncoin-testnet/testnet3 ~%s/.saffroncoin/" % (USERNAME, USERNAME))
     #^ ghetto hack, as armory has hardcoded dir settings in certain place
     
     #make a short script to launch armory_utxsvr
@@ -488,7 +488,7 @@ def do_security_setup(run_as_user, branch, base_path, dist_path, enable=True):
 
     #set up fail2ban
     runcmd("apt-get -y install fail2ban")
-    runcmd("install -m 0644 -o root -g root -D %s/linux/other/fail2ban.jail.conf /etc/fail2ban/jail.d/counterblock.conf" % dist_path)
+    runcmd("install -m 0644 -o root -g root -D %s/linux/other/fail2ban.jail.conf /etc/fail2ban/jail.d/csfrblock.conf" % dist_path)
     runcmd("service fail2ban restart")
     
     #set up psad
