@@ -100,7 +100,7 @@ def do_backend_rpc_setup(run_as_user, branch, base_path, dist_path, run_mode, ba
     backend_rpc_password = pass_generator()
     backend_rpc_password_testnet = pass_generator()
 
-    if backend_rpc_mode == 'b': #saffroncoind
+    if backend_rpc_mode == 's': #saffroncoind
         #Install saffroncoind
         SAFFRONCOIND_VER = "1.3.4"
         runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoin-%s-linux" % SAFFRONCOIND_VER)
