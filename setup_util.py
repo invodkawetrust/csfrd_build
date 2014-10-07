@@ -116,7 +116,7 @@ def git_repo_clone(repo_name, repo_url, repo_dest_dir, branch="AUTO", for_user="
         runcmd("chmod -R u+rw,g+rw,o+r,o-w %s" % (repo_dest_dir,)) #just in case
 
 def config_runit_for_service(dist_path, service_name, enabled=True, manual_control=True):
-    #assert os.path.exists("%s/linux/runit/%s" % (dist_path, service_name))
+    assert os.path.exists("%s/linux/runit/%s" % (dist_path, service_name))
     
     #stop old upstart service and remove old upstart init scripts (if present)
     if os.path.exists("/etc/init/%s.conf" % service_name):
