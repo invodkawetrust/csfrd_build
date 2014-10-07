@@ -607,10 +607,10 @@ def gather_build_questions(answered_questions, noninteractive, docker):
     assert answered_questions['run_mode'] in QUESTION_FLAGS['run_mode']
     
     if 'backend_rpc_mode' not in answered_questions and noninteractive:
-        answered_questions['backend_rpc_mode'] = 'b' 
+        answered_questions['backend_rpc_mode'] = 's' 
     elif 'backend_rpc_mode' not in answered_questions:
         answered_questions['backend_rpc_mode'] = ask_question(
-            "Backend RPC services, use (S)affroncoind or (p)yrpcwallet? (S/p)", ('s', 'p'), 'b')
+            "Backend RPC services, use (S)affroncoind or (p)yrpcwallet? (S/p)", ('s', 'p'), 's')
         print("\tUsing %s" % ('saffroncoind' if answered_questions['backend_rpc_mode'] == 's' else 'pyrpcwallet'))
     assert answered_questions['backend_rpc_mode'] in QUESTION_FLAGS['backend_rpc_mode']
 
