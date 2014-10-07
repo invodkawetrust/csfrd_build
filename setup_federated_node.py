@@ -35,7 +35,7 @@ DAEMON_USERNAME = "csfrd"
 USER_HOMEDIR = "/home/csfr"
 QUESTION_FLAGS = collections.OrderedDict({
     "op": ('u', 'r'),
-    "role": ('cSFRwallet', 'vendingmachine', 'blockexplorer', 'csfrd_only', 'btcpayescrow'),
+    "role": ('csfrwallet', 'vendingmachine', 'blockexplorer', 'csfrd_only', 'btcpayescrow'),
     "branch": ('master', 'develop'),
     "run_mode": ('t', 'm', 'b'),
     "backend_rpc_mode": ('b', 'p'),
