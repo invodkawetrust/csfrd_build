@@ -347,7 +347,7 @@ Here's a description of the possible fields:
 
 **Required fields:**
 
-* **servers**: cSFRwallet should work out-of-the-box in a scenario where you have a single Counterblock Federated Node that both hosts the
+* **servers**: cSFRwallet should work out-of-the-box in a scenario where you have a single cSFRblock Federated Node that both hosts the
 static site content, as well as the backend cSFRblock API services. However, Counterwallet can also be set up to work
 in MultiAPI mode, where it can query more than one server (to allow for both redundancy and load balancing). To do this,
 set this ``servers`` parameter as a list of multiple server URIs. Each URI can have a ``http://`` or ``https://`` prefix
