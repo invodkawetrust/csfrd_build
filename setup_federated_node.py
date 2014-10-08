@@ -312,7 +312,6 @@ def do_nginx_setup(run_as_user, base_path, dist_path, enable=True):
     #set up the build environment
     runcmd('''cd /tmp/ngx_openresty-%s && make install DESTDIR=/tmp/openresty \
 && mkdir -p /tmp/openresty/var/lib/nginx \
-&& mkdir -p %s/linux/runit \
 && install -m 0755 -D %s/linux/runit/nginx/run /tmp/openresty/etc/sv/nginx/run \
 && install -m 0755 -D %s/linux/nginx/nginx.conf /tmp/openresty/etc/nginx/nginx.conf \
 && install -m 0755 -D %s/linux/nginx/csfrblock.conf /tmp/openresty/etc/nginx/sites-enabled/csfrblock.conf \
