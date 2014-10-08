@@ -1,0 +1,6 @@
+#!/bin/sh
+
+USER=csfrd
+USER_HOME=/home/csfr
+
+exec chpst -u ${USER} saffroncoind -daemon=0 -datadir=${USER_HOME}/.saffroncoin

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+USER=csfrd
+export USER_HOME=/home/csfr
+
+exec su -s /bin/bash -c '/usr/local/bin/csfrblockd --data-dir=${USER_HOME}/.config/csfrblockd' ${USER}

@@ -1,0 +1,6 @@
+#!/bin/sh
+ 
+USER=csfrd
+USER_HOME=/home/csfr
+ 
+exec chpst -u ${USER} svlogd -tt ${USER_HOME}/insight-api/log
