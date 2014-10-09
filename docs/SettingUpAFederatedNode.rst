@@ -9,7 +9,7 @@ Such roles may be:
    * cSFRwallet server
    * Vending machine (future)
    * Block explorer server (future)
-   * A plain old ``counterpartyd`` server
+   * A plain old ``csfrd`` server
 
 Each backend server runs `multiple services <components>`__ (some required, and some optional, or based on the role chosen).
 As each server is self-contained, they can be combined by the client-side software to allow for high-availability/load balancing.
@@ -348,7 +348,7 @@ Here's a description of the possible fields:
 **Required fields:**
 
 * **servers**: cSFRwallet should work out-of-the-box in a scenario where you have a single cSFRblock Federated Node that both hosts the
-static site content, as well as the backend cSFRblock API services. However, Counterwallet can also be set up to work
+static site content, as well as the backend cSFRblock API services. However, cSFRwallet can also be set up to work
 in MultiAPI mode, where it can query more than one server (to allow for both redundancy and load balancing). To do this,
 set this ``servers`` parameter as a list of multiple server URIs. Each URI can have a ``http://`` or ``https://`` prefix
 (we strongly recommend using HTTPS), and the strings must *not* end in a slash (just leave it off). If the server hostname

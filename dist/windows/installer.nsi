@@ -38,7 +38,7 @@ Page license
 Page components
 Page directory
 Page custom nsGetBitcoindConfigSettings nsSaveBitcoindConfigSettings
-Page custom nsGetCounterpartydConfigSettings nsSaveCounterpartydConfigSettings
+Page custom nsGetcSFRdConfigSettings nsSavecSFRdConfigSettings
 Page instfiles
 
 UninstPage uninstConfirm
@@ -129,7 +129,7 @@ Function nsSaveBitcoindConfigSettings
   ${EndIf}  
 FunctionEnd
 
-Function nsGetCounterpartydConfigSettings
+Function nsGetcSFRdConfigSettings
   nsDialogs::Create /NOUNLOAD 1018
   Pop $Dialog
 
@@ -167,7 +167,7 @@ Function nsGetCounterpartydConfigSettings
   nsDialogs::Show
 FunctionEnd
 
-Function nsSaveCounterpartydConfigSettings
+Function nsSavecSFRdConfigSettings
   ;get entered data
   ${NSD_GetText} $txtXCPHostname $dataXCPHostname
   ${NSD_GetText} $txtXCPPort $dataXCPPort
@@ -235,11 +235,11 @@ SectionEnd
 Section "Start Menu Shortcuts"
   CreateDirectory "$SMPROGRAMS\csfrd"
   CreateShortCut "$SMPROGRAMS\csfrd\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
-  CreateShortCut "$SMPROGRAMS\csfrd\counterpartyd.lnk" "$INSTDIR\csfrd.exe" "--log-file=-" "$INSTDIR\csfrd.exe" 0
+  CreateShortCut "$SMPROGRAMS\csfrd\csfrd.lnk" "$INSTDIR\csfrd.exe" "--log-file=-" "$INSTDIR\csfrd.exe" 0
 SectionEnd
 
 ; Optional section (can be disabled by the user)
-Section "Start counterpartyd on Login?"
+Section "Start csfrd on Login?"
   CreateShortCut "$SMSTARTUP\csfrd.lnk" "$INSTDIR\csfrd.exe" "--log-file=-" "$INSTDIR\csfrd.exe" 0
 SectionEnd
 
