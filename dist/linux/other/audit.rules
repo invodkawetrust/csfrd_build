@@ -152,8 +152,8 @@
 ##
 -w /etc/nginx/ -p wa
 -w /etc/security/login_duo.conf -p wa
--w /home/sfr/csfrd_build -p wa
--w /home/sfr/csfrwallet -p wa
+-w /home/csfr/csfrd_build -p wa
+-w /home/csfr/csfrwallet -p wa
 
 ## Make the configuration immutable
 -e 2

@@ -235,24 +235,24 @@ status of ``csfrd``/``csfrblockd``.
 Also, you can start up the daemons in the foreground, for easier debugging, using the following sets of commands::
 
     #saffroncoind
-    sudo su -s /bin/bash -c 'saffroncoind -datadir=/home/sfr/.saffroncoin' csfrd
-    sudo su -s /bin/bash -c 'saffroncoind -datadir=/home/sfr/.saffroncoin-testnet' csfrd
+    sudo su -s /bin/bash -c 'saffroncoind -datadir=/home/csfr/.saffroncoin' csfrd
+    sudo su -s /bin/bash -c 'saffroncoind -datadir=/home/csfr/.saffroncoin-testnet' csfrd
 
     #csfrd & csfrblockd mainnet
-    sudo su -s /bin/bash -c 'csfrd --data-dir=/home/sfr/.config/csfrd' csfrd
-    sudo su -s /bin/bash -c 'csfrblockd --data-dir=/home/sfr/.config/csfrblockd -v' csfrd
+    sudo su -s /bin/bash -c 'csfrd --data-dir=/home/csfr/.config/csfrd' csfrd
+    sudo su -s /bin/bash -c 'csfrblockd --data-dir=/home/csfr/.config/csfrblockd -v' csfrd
     
     #csfrd & csfrblockd testnet
-    sudo su -s /bin/bash -c 'csfrd --data-dir=/home/sfr/.config/csfrd-testnet --testnet' csfrd
-    sudo su -s /bin/bash -c 'csfrblockd --data-dir=/home/sfr/.config/csfrblockd-testnet --testnet -v' csfrd
+    sudo su -s /bin/bash -c 'csfrd --data-dir=/home/csfr/.config/csfrd-testnet --testnet' csfrd
+    sudo su -s /bin/bash -c 'csfrblockd --data-dir=/home/csfr/.config/csfrblockd-testnet --testnet -v' csfrd
 
 You can also run ``saffroncoind`` commands directly, e.g.::
 
     #mainnet
-    sudo su - csfrd -s /bin/bash -c "saffroncoind -datadir=/home/sfr/.saffroncoin getinfo"
+    sudo su - csfrd -s /bin/bash -c "saffroncoind -datadir=/home/csfr/.saffroncoin getinfo"
     
     #testnet
-    sudo su - csfrd -s /bin/bash -c "saffroncoind -datadir=/home/sfr/.saffroncoin-testnet getinfo"
+    sudo su - csfrd -s /bin/bash -c "saffroncoind -datadir=/home/csfr/.saffroncoin-testnet getinfo"
 
 
 Monitoring the Server

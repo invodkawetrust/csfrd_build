@@ -23,8 +23,8 @@
   <title>cSFRBlock-Related</title>
   <contactpoint email="root@localhost" name="Administrator"/>
     <path type="recursive" events="modify">/etc/nginx</path>
-    <path type="recursive" events="modify">/home/sfr/csfrd_build</path>
-    <path type="recursive" events="modify">/home/sfr/csfrwallet</path>
+    <path type="recursive" events="modify">/home/csfr/csfrd_build</path>
+    <path type="recursive" events="modify">/home/csfr/csfrwallet</path>
     <path type="regexception">\.git</path>
     <path type="regexception">.*?\.swp</path>
     <path type="regexception">.*?\.swx</path>
