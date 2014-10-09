@@ -1,10 +1,10 @@
 #!/bin/sh
 
-sudo service saffroncoind stop
-sudo service saffroncoind-testnet stop
-sudo service insight stop
-sudo service insight-testnet stop
-sudo service csfrd stop
-sudo service csfrd-testnet stop
-sudo service csfrblockd stop
-sudo service csfrblockd-testnet stop
+sudo sv stop saffroncoind
+sudo sv stop saffroncoind-testnet
+sudo sv stop insight
+sudo sv stop insight-testnet
+sudo sv stop csfrd
+sudo sv stop csfrd-testnet
+sudo sv stop csfrblockd
+sudo sv stop csfrblockd-testnet

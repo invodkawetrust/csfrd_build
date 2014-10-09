@@ -31,7 +31,7 @@ def do_federated_node_prerun_checks(require_sudo=True):
         sys.exit(1)
     ubuntu_release = platform.linux_distribution()[1]
     if ubuntu_release != "14.04":
-        logging.error("Only Ubuntu 14.04 supported for Counterblock Federated Node install.")
+        logging.error("Only Ubuntu 14.04 supported for cSFRblock Federated Node install.")
         sys.exit(1)
     #script must be run as root
     if os.geteuid() != 0:

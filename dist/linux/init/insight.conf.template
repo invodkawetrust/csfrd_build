@@ -19,12 +19,12 @@ chown -R $USER $USER_HOME/insight-api
 export INSIGHT_NETWORK=livenet
 export INSIGHT_DB=$USER_HOME/insight-api/db
 #export INSIGHT_IGNORE_CACHE=1
-#export BITCOIND_DATADIR=$USER_HOME/.saffroncoin/
-export BITCOIND_DATADIR=/dev/null
-export BITCOIND_USER=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcuser=\([^ \n]*\).*/\1/p'`
-export BITCOIND_PASS=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcpassword=\([^ \n]*\).*/\1/p'`
-#BITCOIND_HOST -- use the default (localhost)
-#BITCOIND_PORT -- use the default (19710)
-#BITCOIND_P2P_PORT -- use the default (19717)
+#export SAFFRONCOIND_DATADIR=$USER_HOME/.saffroncoin/
+export SAFFRONCOIND_DATADIR=/dev/null
+export SAFFRONCOIND_USER=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcuser=\([^ \n]*\).*/\1/p'`
+export SAFFRONCOIND_PASS=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcpassword=\([^ \n]*\).*/\1/p'`
+#SAFFRONCOIND_HOST -- use the default (localhost)
+#SAFFRONCOIND_PORT -- use the default (19710)
+#SAFFRONCOIND_P2P_PORT -- use the default (19717)
 start-stop-daemon --start -c $USER -d $USER_HOME/insight-api --pidfile $USER_HOME/insight-api/insight.pid --make-pidfile --exec /usr/bin/node -- $USER_HOME/insight-api/insight.js >> $USER_HOME/insight-api/insight.log 2>&1
 end script

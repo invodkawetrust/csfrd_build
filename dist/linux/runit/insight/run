@@ -5,12 +5,12 @@ USER_HOME=/home/csfr
 chown -R $USER $USER_HOME/insight-api
 export INSIGHT_NETWORK=livenet
 export INSIGHT_DB=$USER_HOME/insight-api/db
-export BITCOIND_DATADIR=$USER_HOME/.saffroncoin/
-export BITCOIND_USER=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcuser=\([^ \n]*\).*/\1/p'`
-export BITCOIND_PASS=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcpassword=\([^ \n]*\).*/\1/p'`
-#BITCOIND_HOST -- use the default (localhost)
-#BITCOIND_PORT -- use the default (19710)
-#BITCOIND_P2P_PORT -- use the default (19717)
+export SAFFRONCOIND_DATADIR=$USER_HOME/.saffroncoin/
+export SAFFRONCOIND_USER=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcuser=\([^ \n]*\).*/\1/p'`
+export SAFFRONCOIND_PASS=`cat $USER_HOME/.saffroncoin/saffroncoin.conf | sed -n 's/.*rpcpassword=\([^ \n]*\).*/\1/p'`
+#SAFFRONCOIND_HOST -- use the default (localhost)
+#SAFFRONCOIND_PORT -- use the default (19710)
+#SAFFRONCOIND_P2P_PORT -- use the default (19717)
 
 #sv start bitcoind || exit 1
 cd ${USER_HOME}/insight-api

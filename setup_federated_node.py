@@ -725,7 +725,7 @@ def main():
             runcmd("service iwatch stop", abort_on_failure=False)
         
         #refresh csfrd_build, csfrd and csfrblockd (if available)
-        runcmd("%s/setup.py --noninteractive --branch=AUTO --for-user=csfr %s update" % (base_path,
+        runcmd("sudo python3 %s/setup.py --noninteractive --branch=AUTO --for-user=csfr %s update" % (base_path,
             '--with-csfrblockd' if os.path.exists(os.path.join(dist_path, "csfrblockd")) else ''))
         
         #refresh csfrwallet (if available)

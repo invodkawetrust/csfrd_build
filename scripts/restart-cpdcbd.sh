@@ -1,7 +1,7 @@
 #!/bin/sh
 
-sudo service csfrd restart
-sudo service csfrd-testnet restart
+sudo sv restart csfrd
+sudo sv restart csfrd-testnet
 sleep 10
-sudo service csfrblockd restart
-sudo service csfrblockd-testnet restart
+sudo sv restart csfrblockd
+sudo sv restart csfrblockd-testnet
