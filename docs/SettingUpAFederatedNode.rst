@@ -143,7 +143,7 @@ Once done, start up ``saffroncoind`` daemon(s)::
     sudo service saffroncoind start
     sudo service saffroncoind-testnet start
     
-    sudo tail -f ~sfr/.saffroncoin/debug.log 
+    sudo tail -f ~csfr/.saffroncoin/debug.log 
 
 That last command will give you information on the Saffroncoin blockchain download status. After the blockchain starts
 downloading, **if you've elected to install and use** ``insight``, you can launch the ``insight`` daemon(s)::
@@ -151,21 +151,21 @@ downloading, **if you've elected to install and use** ``insight``, you can launc
     sudo service insight start
     sudo service insight-testnet start
     
-    sudo tail -f ~sfr/insight-api/insight.log 
+    sudo tail -f ~csfr/insight-api/insight.log 
 
 As well as ``armory_utxsvr``, if you're using that (cSFRwallet role only)::
 
     sudo service armory_utxsvr start
     sudo service armory_utxsvr-testnet start
     
-    sudo tail -f ~sfr/.config/armory/armory_utxsvr.log
+    sudo tail -f ~csfr/.config/armory/armory_utxsvr.log
 
 And ``csfrd`` itself::
 
     sudo service csfrd start
     sudo service csfrd-testnet start
     
-    sudo tail -f ~sfr/.config/csfrd/csfrd.log
+    sudo tail -f ~csfr/.config/csfrd/csfrd.log
 
 Then, watching these log, wait for the insight sync (as well as the saffroncoind sync and csfrd syncs) to finish,
 which should take between 7 and 12 hours. After this is all done, reboot the box for the new services to
@@ -175,7 +175,7 @@ start (which includes both ``csfrd`` and ``csfrblockd``).
 process will take between 20 minutes to 1 hour most likely. You can check on the status of ``csfrblockd``'s
 sync using::
 
-    sudo tail -f ~sfr/.config/csfrblockd/csfrblockd.log
+    sudo tail -f ~csfr/.config/csfrblockd/csfrblockd.log
 
 Once it is fully synced up, you should be good to proceed. The next step is to simply open up a web browser, and
 go to the IP address/hostname of the server. You will then be presented to accept your self-signed SSL certificate, and
@@ -213,16 +213,16 @@ Troubleshooting
 If you experience issues with your cSFRblock Federated Node, a good start is to check out the logs. Something like the following should work::
 
     #mainnet
-    sudo tail -f ~sfr/.config/csfrd/csfrd.log
-    sudo tail -f ~sfr/.config/csfrblockd/countewalletd.log
-    sudo tail -f ~sfr/.config/csfrd/api.error.log
-    sudo tail -f ~sfr/.config/csfrblockd/api.error.log
+    sudo tail -f ~csfr/.config/csfrd/csfrd.log
+    sudo tail -f ~csfr/.config/csfrblockd/countewalletd.log
+    sudo tail -f ~csfr/.config/csfrd/api.error.log
+    sudo tail -f ~csfr/.config/csfrblockd/api.error.log
 
     #testnet
-    sudo tail -f ~sfr/.config/csfrd-testnet/csfrd.log
-    sudo tail -f ~sfr/.config/csfrblockd-testnet/csfrblockd.log
-    sudo tail -f ~sfr/.config/csfrd-testnet/api.error.log
-    sudo tail -f ~sfr/.config/csfrblockd-testnet/api.error.log
+    sudo tail -f ~csfr/.config/csfrd-testnet/csfrd.log
+    sudo tail -f ~csfr/.config/csfrblockd-testnet/csfrblockd.log
+    sudo tail -f ~csfr/.config/csfrd-testnet/api.error.log
+    sudo tail -f ~csfr/.config/csfrblockd-testnet/api.error.log
     
     #relevant nginx logs
     sudo tail -f /var/log/nginx/csfrblock.access.log
@@ -309,7 +309,7 @@ Easy Updating
 
 To update the system with new code releases, you simply need to rerun the ``setup_federated_node`` script, like so::
 
-    cd ~sfr/csfrd_build
+    cd ~csfr/csfrd_build
     sudo ./setup_federated_node.py
     
 As prompted, you should be able to choose just to update from git ("G"), instead of to rebuild. However, you would choose the rebuild
