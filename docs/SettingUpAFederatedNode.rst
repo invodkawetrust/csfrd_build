@@ -151,8 +151,8 @@ downloading, **if you've elected to install and use** ``insight``, you can launc
     sudo service insight start
     sudo service insight-testnet start
     
-    sudo tail -f ~csfr/insight-api/insight.log 
-
+    sudo tail -f ~csfr/insight-api/log/current
+    
 As well as ``armory_utxsvr``, if you're using that (cSFRwallet role only)::
 
     sudo service armory_utxsvr start
