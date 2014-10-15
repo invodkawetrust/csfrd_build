@@ -31,7 +31,7 @@ def do_federated_node_prerun_checks(require_sudo=True):
         sys.exit(1)
     ubuntu_release = platform.linux_distribution()[1]
     if ubuntu_release != "14.04":
-        logging.error("Only Ubuntu 14.04 supported for Counterblock Federated Node install.")
+        logging.error("Only Ubuntu 14.04 supported for cSFRblock Federated Node install.")
         sys.exit(1)
     #script must be run as root
     if os.geteuid() != 0:
@@ -61,20 +61,20 @@ def modify_config(param_re, content_to_add, filenames, replace_if_exists=True, d
         f.write(content)
         f.close()
 
-def modify_cp_config(param_re, content_to_add, replace_if_exists=True, config='counterpartyd', net='both', for_user='xcp'):
-    assert config in ('counterpartyd', 'counterblockd', 'both')
+def modify_cp_config(param_re, content_to_add, replace_if_exists=True, config='csfrd', net='both', for_user='csfr'):
+    assert config in ('csfrd', 'csfrblockd', 'both')
     assert net in ('mainnet', 'testnet', 'both')
     cfg_filenames = []
-    if config in ('counterpartyd', 'both'):
+    if config in ('csfrd', 'both'):
         if net in ('mainnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterpartyd", "counterpartyd.conf"))
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrd", "csfrd.conf"))
         if net in ('testnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterpartyd-testnet", "counterpartyd.conf"))
-    if config in ('counterblockd', 'both'):
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrd-testnet", "csfrd.conf"))
+    if config in ('csfrblockd', 'both'):
         if net in ('mainnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterblockd", "counterblockd.conf"))
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrblockd", "csfrblockd.conf"))
         if net in ('testnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterblockd-testnet", "counterblockd.conf"))
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrblockd-testnet", "csfrblockd.conf"))
         
     modify_config(param_re, content_to_add, cfg_filenames, replace_if_exists=replace_if_exists)
 
@@ -92,7 +92,7 @@ def ask_question(question, options, default_option):
             break
     return answer
         
-def git_repo_clone(repo_name, repo_url, repo_dest_dir, branch="AUTO", for_user="xcp", hash=None):
+def git_repo_clone(repo_name, repo_url, repo_dest_dir, branch="AUTO", for_user="csfr", hash=None):
     if branch == 'AUTO':
         try:
             branch = subprocess.check_output("cd %s && git rev-parse --abbrev-ref HEAD"
