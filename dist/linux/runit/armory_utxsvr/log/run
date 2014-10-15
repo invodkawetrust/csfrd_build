@@ -1,6 +1,6 @@
 #!/bin/sh
  
-USER=xcpd
-USER_HOME=/home/xcp
+USER=csfrd
+USER_HOME=/home/csfr
  
 exec chpst -u ${USER} svlogd -tt ${USER_HOME}/.armory/log
