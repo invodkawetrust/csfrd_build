@@ -163,7 +163,7 @@ backend_rpc_password_testnet, csfrd_public, csfrwallet_support_email):
     # as -y is specified, this will auto install csfrblockd full node (mongo and redis) as well as setting
     # csfrd/csfrblockd to start up at startup for both mainnet and testnet (we will override this as necessary
     # based on run_mode later in this function)
-    runcmd("sudo ~%s/csfrd_build/setup.py --noninteractive --branch=%s %s --with-testnet --for-user=%s %s" % (
+    runcmd("sudo python3 ~%s/csfrd_build/setup.py --noninteractive --branch=%s %s --with-testnet --for-user=%s %s" % (
         USERNAME, branch, "" if not docker else '', USERNAME, '--with-csfrblockd' if role != 'csfrd_only' else ''))
     runcmd("cd ~%s/csfrd_build && git config core.sharedRepository group && find ~%s/csfrd_build -type d -print0 | xargs -0 chmod g+s" % (
         USERNAME, USERNAME)) #to allow for group git actions 
