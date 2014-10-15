@@ -153,15 +153,15 @@ def do_backend_rpc_setup(run_as_user, branch, base_path, dist_path, run_mode, ba
     
     return backend_rpc_password, backend_rpc_password_testnet
 
-def do_csfrd_setup(role, run_as_user, docker, branch, base_path, dist_path, run_mode, backend_rpc_password,
-backend_rpc_password_testnet, csfrpartyd_public, csfrwallet_support_email):
+def do_csfr_setup(role, run_as_user, docker, branch, base_path, dist_path, run_mode, backend_rpc_password,
+backend_rpc_password_testnet, csfrd_public, csfrwallet_support_email):
     """Installs and configures csfrd and csfrblockd"""
     csfrd_rpc_password = '1234' if role == 'csfrd_only' and csfrd_public == 'y' else pass_generator()
     csfrd_rpc_password_testnet = '1234' if role == 'csfrd_only' and csfrd_public == 'y' else pass_generator()
     
-    #Run setup.py (as the cSFR user, who runs it sudoed) to install and set up csfrpartyd, csfrblockd
+    #Run setup.py (as the cSFR user, who runs it sudoed) to install and set up csfrd, csfrblockd
     # as -y is specified, this will auto install csfrblockd full node (mongo and redis) as well as setting
-    # csfrpartyd/csfrblockd to start up at startup for both mainnet and testnet (we will override this as necessary
+    # csfrd/csfrblockd to start up at startup for both mainnet and testnet (we will override this as necessary
     # based on run_mode later in this function)
     runcmd("~%s/csfrd_build/setup.py --noninteractive --branch=%s %s --with-testnet --for-user=%s %s" % (
         USERNAME, branch, "--with-bootstrap-db" if not docker else '', USERNAME, '--with-csfrblockd' if role != 'csfrd_only' else ''))
@@ -170,7 +170,7 @@ backend_rpc_password_testnet, csfrpartyd_public, csfrwallet_support_email):
     runcmd("chown -R %s:%s ~%s/csfrd_build" % (USERNAME, USERNAME, USERNAME)) #just in case
     runcmd("chmod -R u+rw,g+rw,o+r,o-w ~%s/csfrd_build" % USERNAME) #just in case
     
-    #now change the csfrpartyd directories to be owned by the csfrd user (and the csfr group),
+    #now change the csfrd directories to be owned by the csfrd user (and the csfr group),
     # so that the csfrd account can write to the database, saved image files (csfrblockd), log files, etc
     runcmd("mkdir -p ~%s/.config/csfrd ~%s/.config/csfrd-testnet" % (USERNAME, USERNAME))    
     runcmd("chown -R %s:%s ~%s/.config/csfrd ~%s/.config/csfrd-testnet" % (
