@@ -153,24 +153,24 @@ def do_backend_rpc_setup(run_as_user, branch, base_path, dist_path, run_mode, ba
     
     return backend_rpc_password, backend_rpc_password_testnet
 
-def do_csfr_setup(role, run_as_user, docker, branch, base_path, dist_path, run_mode, backend_rpc_password,
-backend_rpc_password_testnet, csfrd_public, csfrwallet_support_email):
+def do_csfrd_setup(role, run_as_user, docker, branch, base_path, dist_path, run_mode, backend_rpc_password,
+backend_rpc_password_testnet, csfrpartyd_public, csfrwallet_support_email):
     """Installs and configures csfrd and csfrblockd"""
     csfrd_rpc_password = '1234' if role == 'csfrd_only' and csfrd_public == 'y' else pass_generator()
     csfrd_rpc_password_testnet = '1234' if role == 'csfrd_only' and csfrd_public == 'y' else pass_generator()
     
-    #Run setup.py (as the cSFR user, who runs it sudoed) to install and set up csfrd, csfrblockd
+    #Run setup.py (as the cSFR user, who runs it sudoed) to install and set up csfrpartyd, csfrblockd
     # as -y is specified, this will auto install csfrblockd full node (mongo and redis) as well as setting
-    # csfrd/csfrblockd to start up at startup for both mainnet and testnet (we will override this as necessary
+    # csfrpartyd/csfrblockd to start up at startup for both mainnet and testnet (we will override this as necessary
     # based on run_mode later in this function)
-    runcmd("sudo python3 ~%s/csfrd_build/setup.py --noninteractive --branch=%s %s --with-testnet --for-user=%s %s" % (
-        USERNAME, branch, '', USERNAME, '--with-csfrblockd' if role != 'csfrd_only' else ''))
+    runcmd("~%s/csfrd_build/setup.py --noninteractive --branch=%s %s --with-testnet --for-user=%s %s" % (
+        USERNAME, branch, "--with-bootstrap-db" if not docker else '', USERNAME, '--with-csfrblockd' if role != 'csfrd_only' else ''))
     runcmd("cd ~%s/csfrd_build && git config core.sharedRepository group && find ~%s/csfrd_build -type d -print0 | xargs -0 chmod g+s" % (
         USERNAME, USERNAME)) #to allow for group git actions 
     runcmd("chown -R %s:%s ~%s/csfrd_build" % (USERNAME, USERNAME, USERNAME)) #just in case
     runcmd("chmod -R u+rw,g+rw,o+r,o-w ~%s/csfrd_build" % USERNAME) #just in case
     
-    #now change the csfrd directories to be owned by the csfrd user (and the csfr group),
+    #now change the csfrpartyd directories to be owned by the csfrd user (and the csfr group),
     # so that the csfrd account can write to the database, saved image files (csfrblockd), log files, etc
     runcmd("mkdir -p ~%s/.config/csfrd ~%s/.config/csfrd-testnet" % (USERNAME, USERNAME))    
     runcmd("chown -R %s:%s ~%s/.config/csfrd ~%s/.config/csfrd-testnet" % (
@@ -433,7 +433,7 @@ def do_newrelic_setup(run_as_user, base_path, dist_path, run_mode):
     #install some deps...
     runcmd("sudo apt-get -y install libyaml-dev")
     
-
+    
     #install/setup server agent
     runcmd("add-apt-repository \"deb http://apt.newrelic.com/debian/ newrelic non-free\"")
     runcmd("wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -")
@@ -611,7 +611,7 @@ def gather_build_questions(answered_questions, noninteractive, docker):
     elif 'backend_rpc_mode' not in answered_questions:
         answered_questions['backend_rpc_mode'] = ask_question(
             "Backend RPC services, use (S)affroncoind or (p)yrpcwallet? (S/p)", ('s', 'p'), 's')
-        print("\tUsing %s" % ('saffroncoind' if answered_questions['backend_rpc_mode'] == 's' else 'pyrpcwallet'))
+        print("\tUsing %s" % ('saffroncoind' if answered_questions['backend_rpc_mode'] == 'b' else 'pyrpcwallet'))
     assert answered_questions['backend_rpc_mode'] in QUESTION_FLAGS['backend_rpc_mode']
 
     if 'blockchain_service' not in answered_questions and noninteractive:
@@ -649,7 +649,7 @@ def gather_build_questions(answered_questions, noninteractive, docker):
             answered_questions['csfrwallet_support_email'] = csfrwallet_support_email
         else:
             answered_questions['csfrwallet_support_email'] = answered_questions.get('csfrwallet_support_email', '').strip()
-    else: answered_questions['csfrwallet_support_email'] = None 
+    else: answered_questions['csfrwallet_support_email'] = None
 
     if 'security_hardening' not in answered_questions and noninteractive:
         answered_questions['security_hardening'] = 'y' 
@@ -771,7 +771,7 @@ def main():
     do_security_setup(run_as_user, answered_questions['branch'], base_path, dist_path,
         enable=answered_questions['security_hardening'] == 'y')
     
-    logging.info("cSFRBlock Federated Node Build Complete (whew).")
+    logging.info("cSFRblock Federated Node Build Complete (whew).")
     
     if answered_questions['autostart_services'] == 'y':
         configured_services = find_configured_services()

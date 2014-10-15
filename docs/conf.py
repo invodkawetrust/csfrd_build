@@ -41,7 +41,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'csfrd_build'
-copyright = u'2013, SFRDirect Team'
+copyright = u'2014, SFRDirect Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -228,7 +228,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'csfrd_build', u'SFRDirect Documentation',
-   u'SFRDirect Team', 'csfrd_build', 'One line description of project.',
+   u'SFRDirect Team', 'csfrd_build', 'A Decentralized Financial Platform for Saffroncoin',
    'Miscellaneous'),
 ]
 

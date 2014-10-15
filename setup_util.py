@@ -12,7 +12,7 @@ import subprocess
 
 __all__ = ['pass_generator', 'runcmd', 'do_federated_node_prerun_checks', 'modify_config', 'modify_cp_config', 'ask_question',
     'git_repo_clone', 'config_runit_for_service', 'config_runit_disable_manual_control', 'which', 'rmtree',
-    'fetch_csfrd_bootstrap_db']
+    'fetch_counterpartyd_bootstrap_db']
 
 def pass_generator(size=14, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
@@ -31,7 +31,7 @@ def do_federated_node_prerun_checks(require_sudo=True):
         sys.exit(1)
     ubuntu_release = platform.linux_distribution()[1]
     if ubuntu_release != "14.04":
-        logging.error("Only Ubuntu 14.04 supported for cSFRblock Federated Node install.")
+        logging.error("Only Ubuntu 14.04 supported for Counterblock Federated Node install.")
         sys.exit(1)
     #script must be run as root
     if os.geteuid() != 0:
@@ -61,20 +61,20 @@ def modify_config(param_re, content_to_add, filenames, replace_if_exists=True, d
         f.write(content)
         f.close()
 
-def modify_cp_config(param_re, content_to_add, replace_if_exists=True, config='csfrd', net='both', for_user='csfr'):
-    assert config in ('csfrd', 'csfrblockd', 'both')
+def modify_cp_config(param_re, content_to_add, replace_if_exists=True, config='counterpartyd', net='both', for_user='xcp'):
+    assert config in ('counterpartyd', 'counterblockd', 'both')
     assert net in ('mainnet', 'testnet', 'both')
     cfg_filenames = []
-    if config in ('csfrd', 'both'):
+    if config in ('counterpartyd', 'both'):
         if net in ('mainnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrd", "csfrd.conf"))
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterpartyd", "counterpartyd.conf"))
         if net in ('testnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrd-testnet", "csfrd.conf"))
-    if config in ('csfrblockd', 'both'):
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterpartyd-testnet", "counterpartyd.conf"))
+    if config in ('counterblockd', 'both'):
         if net in ('mainnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrblockd", "csfrblockd.conf"))
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterblockd", "counterblockd.conf"))
         if net in ('testnet', 'both'):
-            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "csfrblockd-testnet", "csfrblockd.conf"))
+            cfg_filenames.append(os.path.join(os.path.expanduser('~'+for_user), ".config", "counterblockd-testnet", "counterblockd.conf"))
         
     modify_config(param_re, content_to_add, cfg_filenames, replace_if_exists=replace_if_exists)
 
@@ -92,7 +92,7 @@ def ask_question(question, options, default_option):
             break
     return answer
         
-def git_repo_clone(repo_name, repo_url, repo_dest_dir, branch="AUTO", for_user="csfr", hash=None):
+def git_repo_clone(repo_name, repo_url, repo_dest_dir, branch="AUTO", for_user="xcp", hash=None):
     if branch == 'AUTO':
         try:
             branch = subprocess.check_output("cd %s && git rev-parse --abbrev-ref HEAD"
@@ -180,10 +180,10 @@ def rmtree(path):
             f=os.rmdir
             rmgeneric(fullpath, f)    
 
-def fetch_csfrd_bootstrap_db(data_dir, testnet=False, chown_user=None):
-    """download bootstrap data for csfrd"""
-    bootstrap_url = "http://saffroncoin.com/csfrd%s-db.latest.tar.gz" % ('-testnet' if testnet else '')
-    appname = "csfrd%s" % ('-testnet' if testnet else '',)
+def fetch_counterpartyd_bootstrap_db(data_dir, testnet=False, chown_user=None):
+    """download bootstrap data for counterpartyd"""
+    bootstrap_url = "http://counterparty-bootstrap.s3.amazonaws.com/counterpartyd%s-db.latest.tar.gz" % ('-testnet' if testnet else '')
+    appname = "counterpartyd%s" % ('-testnet' if testnet else '',)
     logging.info("Downloading %s DB bootstrap data from %s ..." % (appname, bootstrap_url))
     bootstrap_filename, headers = urllib.request.urlretrieve(bootstrap_url)
     logging.info("%s DB bootstrap data downloaded to %s ..." % (appname, bootstrap_filename))

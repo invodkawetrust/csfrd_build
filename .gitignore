@@ -1,36 +1,43 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+*.py[cod]
+env
+env.cwalletd
+env.counterblockd
+docs/_build/*
+dist/counterpartyd
+dist/counterblockd
+dist/counterwalletd
+bin
+npm-debug.log
 
-# Folder config file
-Desktop.ini
+# C extensions
+*.so
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+__pycache__
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Installer logs
+pip-log.txt
 
-# =========================
-# Operating System Files
-# =========================
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
 
-# OSX
-# =========================
+# Translations
+*.mo
 
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must ends with two \r.
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject

@@ -1,5 +1,5 @@
-**The csfrd Build System (csfrd_build)**
+**The counterpartyd Build System (counterpartyd_build)**
 
-See documentation at <http://csfrd-build.readthedocs.org/>.
+See documentation at <http://counterparty.io/docs/>.
 
 Please issue any/all pull requests against **develop**, not **master**.

@@ -148,7 +148,7 @@
 -w /sbin/halt -p x -k power
 
 ##
-##CSFR SPECIFIC
+##SFRDirect SPECIFIC
 ##
 -w /etc/nginx/ -p wa
 -w /etc/security/login_duo.conf -p wa

@@ -11,8 +11,8 @@ Application:
     host: localhost
     port: 27017
     databases:
-      - csfrblockd
-      - csfrblockd_testnet
+      - counterblockd
+      - counterblockd_testnet
 
   #nginx:
   #  name: !HOSTNAME!-nginx
@@ -29,7 +29,7 @@ Application:
       db_count: 2
 
 Daemon:
-  user: csfrd
+  user: xcpd
   pidfile: /var/run/newrelic/newrelic-plugin-agent.pid
 
 Logging:
