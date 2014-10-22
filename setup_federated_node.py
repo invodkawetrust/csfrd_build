@@ -388,7 +388,7 @@ def do_csfrwallet_setup(run_as_user, branch, updateOnly=False):
     if not updateOnly:
         runcmd("npm install -g grunt-cli bower")
     runcmd("cd ~%s/csfrwallet/src && bower --allow-root --config.interactive=false install" % USERNAME)
-    runcmd("cd ~%s/csfrwallet && npm install" % USERNAME)
+    runcmd("cd ~%s/csfrwallet && npm install -g" % USERNAME)
     runcmd("cd ~%s/csfrwallet && grunt build --force" % USERNAME) #will generate the minified site
     runcmd("chown -R %s:%s ~%s/csfrwallet" % (USERNAME, USERNAME, USERNAME)) #just in case
     runcmd("chmod -R u+rw,g+rw,o+r,o-w ~%s/csfrwallet" % USERNAME) #just in case
