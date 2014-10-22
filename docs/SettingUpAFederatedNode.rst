@@ -140,30 +140,30 @@ or from *develop* **only** if you are a developer or want access to bleeding edg
 
 Once done, start up ``saffroncoind`` daemon(s)::
 
-    sudo service saffroncoind start
-    sudo service saffroncoind-testnet start
+    sudo sv start saffroncoind 
+    sudo sv start saffroncoind-testnet 
     
     sudo tail -f ~csfr/.saffroncoin/debug.log 
 
 That last command will give you information on the Saffroncoin blockchain download status. After the blockchain starts
 downloading, **if you've elected to install and use** ``insight``, you can launch the ``insight`` daemon(s)::
 
-    sudo service insight start
-    sudo service insight-testnet start
+    sudo sv start insight
+    sudo sv start insight-testnet 
     
     sudo tail -f ~csfr/insight-api/log/current
     
 As well as ``armory_utxsvr``, if you're using that (cSFRwallet role only)::
 
-    sudo service armory_utxsvr start
-    sudo service armory_utxsvr-testnet start
+    sudo sv start armory_utxsvr 
+    sudo sv start armory_utxsvr-testnet 
     
     sudo tail -f ~csfr/.config/armory/armory_utxsvr.log
 
 And ``csfrd`` itself::
 
-    sudo service csfrd start
-    sudo service csfrd-testnet start
+    sudo sv start csfrd 
+    sudo sv start csfrd-testnet 
     
     sudo tail -f ~csfr/.config/csfrd/csfrd.log
 
@@ -204,7 +204,7 @@ SSL certificate lines, and uncomment the production SSL cert lines, like so::
 
 Then restart nginx::
 
-    sudo service nginx restart
+    sudo sv nginx restart
 
 
 Troubleshooting
