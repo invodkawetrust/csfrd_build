@@ -104,7 +104,7 @@ def do_backend_rpc_setup(run_as_user, branch, base_path, dist_path, run_mode, ba
         #Install saffroncoind
         SAFFRONCOIND_VER = "1.3.4"
         runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoin-%s-linux" % SAFFRONCOIND_VER)
-        runcmd("wget -O /tmp/saffroncoind.tar.gz https://github.com/saffroncoin/saffroncoin/releases/download/%s/saffroncoin-binary-%s.tar.gz" % (SAFFRONCOIND_VER, SAFFRONCOIND_VER))
+        runcmd("wget -O /tmp/saffroncoind.tar.gz https://github.com/saffroncoin/saffroncoin/releases/download/%s/saffroncoin-binary-%s.tar.gz --no-check-certificate" % (SAFFRONCOIND_VER, SAFFRONCOIND_VER))
         runcmd("tar -C /tmp -zxvf /tmp/saffroncoind.tar.gz")
         runcmd("cp -af /tmp/saffroncoind /usr/bin")
         runcmd("rm -rf /tmp/saffroncoind.tar.gz /tmp/saffroncoind")
